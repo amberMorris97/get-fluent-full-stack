@@ -1,0 +1,157 @@
+.header,
+.nav-links,
+.footer {
+    display: flex;
+}
+
+.header {
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 6px solid #A2D729;
+  background-color: #1C2541;
+  height: 75px;
+  color: #F5EFDD;
+}
+
+.header img {
+  align-self: center;
+}
+
+.nav-menu {
+  position: relative;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: #F5EFDD;
+}
+
+.nav-links {
+  gap: 2em;
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.footer {
+  background-color: #1B1B2F;
+  color: #F5EFDD;
+  height: 80px;
+  margin-top: auto;
+  bottom: 0;
+  position: sticky;
+  font-family: 'Space Grotesk', sans-serif;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 20px;
+  gap: 10em;
+}
+
+.footer ul li a {
+    text-decoration: none;
+    color: #F5EFDD;
+}
+
+.footer-list li, img {
+    cursor: pointer;
+}
+
+.footer p {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.learning-resources-modal h2 {
+    font-family: 'IBM Plex Mono', monospace;
+    color: #16348C;
+    font-weight: 300;
+}
+
+.ui-divider {
+    padding: 10px;
+}
+
+@media (max-width: 767px) {
+    .nav-toggle {
+        display: flex;
+        margin-left: auto;
+    }
+
+    .nav-container {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0.5rem;
+        width: 200px;
+        background-color: #1C2541;
+        padding: 20px;
+        margin-top: 0.5rem;
+        z-index: 100;
+    }
+
+    .nav-container.open {
+        display: block;
+    }
+
+    .nav-container.open .nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+
+    .footer ul {
+        align-items: center;
+        padding: 20px;
+        gap: 0;
+    }
+}     
+
+@media (max-width: 766px) {
+    .header h1 {
+        font-size: large;
+        margin-top: 10px;
+    }
+
+    .footer,
+    .footer ul {
+        display: flex;
+    }
+
+    .footer {
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: row;
+        height: 100px;
+        text-align: center;
+    }
+
+    .footer ul {
+        flex-direction: column;
+    }
+
+    .footer ul {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 307px) {
+    .header h1 {
+        margin: 0;
+    }
+}

@@ -1,0 +1,156 @@
+.home-page,
+.about-page,
+.flashcard-page,
+.all-phrases-page,
+.no-flashcards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home-page,
+.about-page,
+.about-page p,
+.home-page-btns,
+.home-page h1 {
+    padding: 20px;
+}
+
+.home-page h1, .flashcard-page h2 {
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.sub-title, .tap-to-flip {
+    font-family: 'IBM Plex Mono', monospace;
+    color: #16348C;
+}
+
+.home-page-btns,
+.flashcard-btns {
+  display: flex;
+}
+
+.home-page-btns,
+.flashcard-buttons,
+.all-phrases-page {
+    gap: 2rem;
+}
+
+.about-page p {
+    font-size: larger;
+    width: 50vw;
+    text-align: center;
+}
+
+
+.flashcard-popup {
+    gap: 2em;
+    font-family: 'IBM Plex Mono', monospace;
+    background-color: #F5EFDD;
+    color: #1C2541;                                      
+    font-weight: bolder;
+}
+
+.flashcard-popup .btn {
+  width: fit-content!important;
+  padding: 10px!important;
+}
+
+.before-you-start, .pronunciation-cell {
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+.before-you-start {
+  color: rgb(200, 29, 37);
+}
+
+.phrase-cell, .translation-cell, .pronunciation-cell {
+  border: 1px solid black;
+  border-radius: 12px;
+  height: 5vh;
+  text-align: center;
+  padding: 5px;
+}
+
+.all-phrases-page h2 {
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.register-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+}
+
+.user-profile-page {
+    display: flex;
+    justify-content: center;
+}
+
+.user-profile-content-box {
+    border: 1px solid;
+    width: 60vw;
+    height: 70vh;
+    margin-right: 30vw;
+    margin-top: 75px;
+    overflow-y: scroll;
+}
+
+.user-profile-content-box-btns {
+    padding: 25px;
+    display: flex;
+    gap: 1em;
+    justify-content: center;
+    
+}
+
+.user-flashcards-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+    padding: 25px;
+}
+
+.user-flashcard-preview {
+    border: 1px solid;
+    border-radius: 12px;
+    width: 25%;
+    height: 25vh;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+}
+
+.user-flashcard-preview h3 {
+    font-weight: 200;
+    font-style: italic;
+}
+
+@media (max-width: 767px) {
+    .about-page p {
+        font-size: small;
+        width: 80vw;
+    }
+
+    .home-page-btns {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+
+    .home-page h2 {
+      font-size: larger;
+    }
+
+}
+
+@media (max-width: 766px) {
+    .flashcard-btns {
+        width: 80%;
+    }
+}
+

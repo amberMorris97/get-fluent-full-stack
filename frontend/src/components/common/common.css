@@ -1,0 +1,294 @@
+.form-container {
+    padding: 20px;
+}
+
+.form-container h2 {
+    text-align: center;
+}
+
+.contact-form {
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: 200px 200px;
+    gap: 3rem!important;
+}
+
+.contact-form button {
+    grid-column: 1 / 3;
+    margin: auto;
+}
+
+.card,
+.card-inner,
+.flashcard-front,
+.flashcard-back {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.flashcard,
+.phrase-card {
+    width: 50vw;
+    height: 50vh;
+    align-items: center;
+}
+
+.phrase-card-inner {
+    gap: 2rem;
+    text-align: center;
+}
+
+.phrase-card-inner h3,
+.flashcard-front {
+    font-size: xx-large;
+}
+
+.phrase-card-inner h4 {
+    font-size: x-large;
+    font-style: italic;
+}
+
+.flashcard, .phrase-card {
+    perspective: 1000px;
+    background: transparent;
+    cursor: pointer;
+}
+
+.flashcard-inner, .phrase-card-inner {
+    position: relative;
+    width: 100%;
+    height: 80%;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.flashcard.flipped .flashcard-inner, .flashcard-back {
+    transform: rotateY(180deg);
+}
+
+.flashcard-front,
+.flashcard-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.flashcard-front,
+.flashcard-back,
+.phrase-card-inner {
+    border: 3px solid #995FA3;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 10px 20px 1px;
+}
+
+.phrase-card h4,
+.flashcard-back {
+    font-weight: 300;
+}
+
+.flashcard-back {
+  background-color: #995FA3;
+  font-size: x-large;
+}
+
+.flashcard-btns {
+    gap: 3rem;
+}
+
+.phrase-pronunciation {
+    background-color: #A2D729;
+    border: 1px solid black;
+    border-radius: 999px;
+    padding: 10px;
+}
+
+.flashcard .phrase-pronunciation {
+    font-size: medium;
+    margin-top: 15px;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+
+.modal-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 50px;
+    z-index: 1000;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    background-color: #F5EFDD;
+    border: 1px solid black;
+    border-radius: 12px;
+    overflow: scroll;
+}
+
+.modal-content h2 {
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.close-modal-btn {
+    width: 25%!important;
+    align-self: flex-end;
+}
+
+.org-link {
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 12px;
+    padding: 15px;
+    width: 20vw;
+    margin-top: 10px;
+    transition: transform 0.2ease, box-shadow 0.2 ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.org-link a {
+    text-decoration: none;
+    color: black;
+}
+
+.org-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15)
+}
+
+.btn {
+  background: transparent;
+  box-shadow: 0 5px 0 #1B1B2F;
+  color: white;
+  border-radius: 999px;
+  border: 1px solid #182038;
+  width: 12vw;
+  height: 5vh;
+  cursor: pointer;
+  color: black;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: bold;
+  font-size: medium;
+} 
+
+.add-flashcard-btn, .remove-flashcard-btn {
+  background-color: #A2D729;
+}
+
+.btn:active {
+  box-shadow: none;
+  transform: translateY(5px);
+}
+
+.form-container label {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.form-container label span {
+    grid-column: 2;
+    text-align: center;
+    color: rgb(200, 29, 37);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: x-small;
+}
+
+@media (max-width: 300px) {
+    .phrase-card h3, .flashcard h3 {
+        font-size: large;
+    }
+
+    .phraseCard h4 {
+        font-size: medium;
+    }
+
+    .phrase-pronunciation {
+        font-size: small;
+    }
+}
+
+
+@media (max-width: 767px) {
+  .phrase-card h3, .flashcard h3 {
+    font-size: x-large;
+  }
+
+  .phrase-card h4 {
+    font-size: large;
+  }
+
+  .flashcard-wrapper {
+    padding: 20px;
+  }
+
+  .flashcard-back {
+    font-weight: lighter;
+  }
+
+  .flashcard {
+    text-align: center;
+  }
+
+  .flashcard-btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+  }
+
+  .before-you-start {
+    font-size: x-small;
+  }
+
+  .haiti-aid-title {
+    font-size: large;
+  }
+
+  .haiti-aid-paragraph {
+    font-size: medium;
+  }
+
+  .org-link {
+    width: 55vw;
+    font-size: small;
+  }
+
+  .form-container {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .contact-form {
+    display: flex!important;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }           
+
+  .contact-form input, textarea {
+    width: 40vw;
+  }
+
+  .btn {
+    width: 50vw;
+  }
+
+  .modal-content .close-modal-btn {
+    width: 100px!important;
+  }
+}
