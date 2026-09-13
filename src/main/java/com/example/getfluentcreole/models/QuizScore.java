@@ -19,6 +19,9 @@ public class QuizScore {
     @Column(name = "score", nullable = false)
     private int score;
 
+    @Column(name = "quiz_length", nullable = false)
+    private int quizLength;
+
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
@@ -30,9 +33,10 @@ public class QuizScore {
     public QuizScore() {
     }
 
-    public QuizScore(User user, Integer score) {
+    public QuizScore(User user, Integer score, int quizLength) {
         this.user = user;
         this.score = score;
+        this.quizLength = quizLength;
     }
 
     public int getId() {
@@ -61,5 +65,13 @@ public class QuizScore {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public int getQuizLength() {
+        return quizLength;
+    }
+
+    public void setQuizLength(int quizLength) {
+        this.quizLength = quizLength;
     }
 }
