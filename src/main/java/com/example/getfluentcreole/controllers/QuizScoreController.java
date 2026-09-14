@@ -48,7 +48,11 @@ public class QuizScoreController {
 
         List<QuizScore> quizScores = quizScoreRepository.findByUser(user);
 
-        return new ResponseEntity<>(quizScores, HttpStatus.OK);
+        List<QuizScoreResponseDTO> quizScoreResponses = quizScores.stream()
+                .map(this::mapToQuizScoreResponseDTO)
+                .toList();
+
+        return new ResponseEntity<>(quizScoreResponses, HttpStatus.OK);
     }
 
     private QuizScoreResponseDTO mapToQuizScoreResponseDTO(QuizScore quizScore) {

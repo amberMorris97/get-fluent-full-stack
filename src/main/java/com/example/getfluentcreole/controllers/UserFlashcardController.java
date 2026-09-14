@@ -72,4 +72,27 @@ public class UserFlashcardController {
         userFlashcardRepository.deleteById(flashcardId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @PutMapping("/update/{flashcardId}")
+    public ResponseEntity<?> updateUserFlashcardStatus(@PathVariable int flashcardId, @RequestBody UserFlashcardRequestDTO dto, Authentication authentication) {
+        String requestingEmail = authentication.getName();
+
+        if (!userFlashcardRepository.existsById(flashcardId)) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        UserFlashcard flashcard = userFlashcardRepository.findById(flashcardId).orElse(null);
+
+        if (flashcard == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        if (!flashcard.getUser().getEmailAddress().equals(requestingEmail)) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+
+        flashcard.setStatus(dto.getStatus());
+        userFlashcardRepository.save(flashcard);
+        return new ResponseEntity<>(new UserFlashcardResponseDTO(flashcard), HttpStatus.OK);
+    }
 }
