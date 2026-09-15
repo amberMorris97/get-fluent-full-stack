@@ -8,6 +8,10 @@ import com.example.getfluentcreole.repositories.QuizScoreRepository;
 import com.example.getfluentcreole.repositories.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,13 +46,17 @@ public class QuizScoreController {
     }
 
     @GetMapping("/{emailAddress}")
-    public ResponseEntity<?> getQuizScoresByUser(@PathVariable String emailAddress) {
+    public ResponseEntity<?> getQuizScoresByUser(
+            @PathVariable String emailAddress,
+            @RequestParam(defaultValue = "0") int offset,
+            @RequestParam(defaultValue = "10") int limit) {
         User user = userRepository.findByEmailAddress(emailAddress)
                 .orElseThrow(() -> new RuntimeException("User not found with email: " + emailAddress));
 
-        List<QuizScore> quizScores = quizScoreRepository.findByUser(user);
+        Pageable pageable = PageRequest.of(offset, limit, Sort.by("createdAt").descending());
+        Page<QuizScore> quizScorePage = quizScoreRepository.findByUser(user, pageable);
 
-        List<QuizScoreResponseDTO> quizScoreResponses = quizScores.stream()
+        List<QuizScoreResponseDTO> quizScoreResponses = quizScorePage.getContent().stream()
                 .map(this::mapToQuizScoreResponseDTO)
                 .toList();
 
