@@ -1,6 +1,7 @@
 package com.example.getfluentcreole.controllers;
 
 import com.example.getfluentcreole.dto.request.QuizScoreRequestDTO;
+import com.example.getfluentcreole.dto.response.QuizScorePageResponseDTO;
 import com.example.getfluentcreole.dto.response.QuizScoreResponseDTO;
 import com.example.getfluentcreole.models.QuizScore;
 import com.example.getfluentcreole.models.User;
@@ -60,7 +61,9 @@ public class QuizScoreController {
                 .map(this::mapToQuizScoreResponseDTO)
                 .toList();
 
-        return new ResponseEntity<>(quizScoreResponses, HttpStatus.OK);
+        QuizScorePageResponseDTO quizScorePageResponse = new QuizScorePageResponseDTO(quizScoreResponses, quizScorePage.hasNext(), offset);
+
+        return new ResponseEntity<>(quizScorePageResponse, HttpStatus.OK);
     }
 
     private QuizScoreResponseDTO mapToQuizScoreResponseDTO(QuizScore quizScore) {
