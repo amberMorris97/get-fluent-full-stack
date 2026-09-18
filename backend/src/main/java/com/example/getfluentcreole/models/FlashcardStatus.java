@@ -1,8 +1,8 @@
 package com.example.getfluentcreole.models;
 
 public enum FlashcardStatus {
-    NEEDS_WORK("Needs Work"),
-    MASTERED("Mastered");
+    NEEDS_WORK("NEEDS_WORK"),
+    MASTERED("MASTERED");
 
     private final String displayName;
 

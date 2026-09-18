@@ -4,12 +4,12 @@ import com.example.getfluentcreole.models.FlashcardStatus;
 
 public class UserFlashcardRequestDTO {
     private String email;
-    private int phraseId;
+    private Integer phraseId;
     private FlashcardStatus status;
 
     public UserFlashcardRequestDTO() {}
 
-    public UserFlashcardRequestDTO(String email, int phraseId, FlashcardStatus status) {
+    public UserFlashcardRequestDTO(String email, Integer phraseId, FlashcardStatus status) {
         this.email = email;
         this.phraseId = phraseId;
         this.status = status;
@@ -23,7 +23,7 @@ public class UserFlashcardRequestDTO {
         this.email = email;
     }
 
-    public int getPhraseId() {
+    public Integer getPhraseId() {
         return phraseId;
     }
 
