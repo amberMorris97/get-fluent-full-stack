@@ -51,7 +51,7 @@ import { ModalContext } from '../../context/ModalContext';
                     </Link>
                 </li>
                 <li>
-                    <Link to="https://github.com/amberMorris97/get-fluent" target="_blank">
+                    <Link to="https://github.com/amberMorris97/get-fluent-full-stack" target="_blank">
                       Project Source
                     </Link>
                 </li>
