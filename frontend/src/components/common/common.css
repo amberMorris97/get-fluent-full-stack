@@ -102,6 +102,10 @@
     gap: 3rem;
 }
 
+.flashcard-btns button {
+    width: 15vw;
+}
+
 .phrase-pronunciation {
     background-color: #A2D729;
     border: 1px solid black;
