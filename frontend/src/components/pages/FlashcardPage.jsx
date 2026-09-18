@@ -49,11 +49,11 @@ const FlashcardPage = ({ notify }) => {
         setFlipped(false);
     };
 
-    if (isFlashcardsLoading || !currentFlashcardPhrase) {
+    if (isFlashcardsLoading) {
         return <div>Loading...</div>
     };
 
-    if (!userFlashcards || userFlashcards.length === 0) {
+    if (!userFlashcards || userFlashcards.length === 0 || !currentFlashcardPhrase) {
         return (
             <div className="no-flashcards">
                 <Card flipped={flipped} onClick={handleFlipState} />

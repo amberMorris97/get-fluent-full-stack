@@ -1,9 +1,14 @@
 import { useContext } from "react";
 import Button from "../common/Button";
+import { useNavigate } from "react-router";
 import { DataContext } from "../../context/DataContext";
+import { AuthContext } from "../../context/AuthContext";
 
 const AllPhrasesPage = ({ allPhrases, flashcardPhraseIds, userFlashcards, notify }) => {
     const { addUserFlashcard, deleteUserFlashcard } = useContext(DataContext);
+    const { auth } = useContext(AuthContext);
+
+    const navigate = useNavigate();
 
     const handleAddFlashcard = async (phraseId) => {
         try {
@@ -46,8 +51,8 @@ const AllPhrasesPage = ({ allPhrases, flashcardPhraseIds, userFlashcards, notify
                                 <td className="pronunciation-cell" data-label="Pronunciation">{phrase.pronunciation}</td>
                                 <td>
                                     <Button
-                                        label={`${isSelected ? "Remove flashcard" : "Add flashcard"}`}
-                                        onClick={!isSelected ? () => handleAddFlashcard(phrase.id) : () => handleDeleteFlashcard(phrase.id)}
+                                        label={`${!auth.isAuthenticated ? "Log In" : isSelected ? "Remove flashcard" : "Add flashcard"}`}
+                                        onClick={!auth.isAuthenticated ? () => navigate('/login') : !isSelected ? () => handleAddFlashcard(phrase.id) : () => handleDeleteFlashcard(phrase.id)}
                                         className="all-phrases-btn"
                                     />
                                 </td>

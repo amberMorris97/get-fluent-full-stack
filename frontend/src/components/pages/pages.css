@@ -243,6 +243,10 @@
     background-color: #A2D729;
 }
 
+.quiz-score-display-box {
+    text-align: center;
+}
+
 .progress-bar-wrapper {
     width: 75%;
     height: 5vh;
@@ -304,7 +308,7 @@
 }
 
 .preview-card {
-    border: 1px solid #995FA3   ;
+    border: 1px solid #995FA3;
     border-radius: 15px;
     width: 15vw;
     height: 45vh;
@@ -328,6 +332,11 @@
     top: 0;
     right: 0;
     padding: 25px;
+    cursor: pointer;
+}
+
+.preview-card-inner i {
+    cursor: pointer;
 }
 
 .preview-card h2 {
@@ -418,6 +427,18 @@
     .preview-card {
         width: 40vw;
     }
+
+    .user-profile-content-grid {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .my-flashcards-container {
+        width: 75vw;
+    }
+
 }
 
 @media (max-width: 767px) {
@@ -434,13 +455,6 @@
 
     .home-page h2 {
       font-size: larger;
-    }
-
-    .user-profile-content-grid {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
     }
 
     .quiz-score-display-box {
@@ -462,7 +476,37 @@
     }
 
     .my-flashcards-filter-btns {
-        gap: 3em;
+        display: grid;
+        grid-template-areas:
+        '. a a .'
+        '. b c .';
+        gap: 1em;
+    }
+
+    .my-flashcards-filter-btns .btn {
+        width: 25vw!important;
+    }
+
+    .flashcard-status-box button {
+        display: none;
+    }
+
+    .flashcard-status-box {
+        display: flex;
+        gap: 2em;
+    }
+
+    .all-filter-btn {
+        grid-area: a;
+        justify-self: center;
+    }
+
+    .mastered-filter-btn {
+        grid-area: b;
+    }
+
+    .needs-work-filter-btn {
+        grid-area: c;
     }
 
     .quiz-content-box {
@@ -518,34 +562,13 @@
 }
 
 @media (max-width: 520px) {
-    .my-flashcards-filter-btns {
-        display: grid;
-        grid-template-areas:
-        '. a a .'
-        '. b c .';
-        gap: 1em;
-    }
-
-    .all-filter-btn {
-        grid-area: a;
-        justify-self: center;
-    }
-
-    .mastered-filter-btn {
-        grid-area: b;
-    }
-
-    .needs-work-filter-btn {
-        grid-area: c;
-    }
-
     .my-flashcards-filter-btns button {
         width: 25vw!important;
         height: 7vh;
     }
 
     .preview-card {
-        height: 60vh;
+        height: 50vh;
     }
 
     .flashcard-status-box button {

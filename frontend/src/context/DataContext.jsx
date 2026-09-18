@@ -12,7 +12,7 @@ export const DataContextProvider = ({ children }) => {
     const [quizScoresPage, setQuizScoresPage] = useState(0);
     const [quizScoreHasNext, setQuizScoreHasNext] = useState(false);
     const [allPhrases, setAllPhrases] = useState(null);
-    const [userFlashcards, setUserFlashcards] = useState(null);
+    const [userFlashcards, setUserFlashcards] = useState([]);
     const [userQuizScores, setUserQuizScores] = useState(null);
 
     const { auth } = useContext(AuthContext);
@@ -65,7 +65,7 @@ export const DataContextProvider = ({ children }) => {
         } catch(error) {
             throw error;
         } finally {
-            fetchUserFlashcards();
+            fetchUserFlashcards( );
         }
     };
 
@@ -85,8 +85,7 @@ export const DataContextProvider = ({ children }) => {
         } catch(error) {
             throw error;
         } finally {
-            // TODO:
-            fetchQuizScores(email);
+            fetchQuizScores();
         }
     };
 

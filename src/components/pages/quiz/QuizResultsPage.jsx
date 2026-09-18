@@ -4,8 +4,14 @@ import Button from "../../common/Button";
 const QuizResultsPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
+
+    if (!location.state) {
+        return navigate('/');
+    }
+
     const { score, total } = location.state;
     const percent = Math.round((score / total) * 100);
+
     return (
         <div className="quiz-results-page">
             <h1>Quiz Results</h1>

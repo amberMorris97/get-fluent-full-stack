@@ -2,6 +2,21 @@ import Button from './Button';
 import IconButton from './IconButton';
 
 const Card = ({ type, phrase, flipped, onClick, flashcardId, onIconClick }) => {
+    if (!phrase) {
+        return (
+            <div className={`card flashcard ${flipped ? 'flipped' : ''}`} onClick={onClick}>
+                <div className="flashcard-inner">
+                    <div className="flashcard-front">
+                        <h3>No flashcards yet.</h3>
+                    </div>
+                    <div className="flashcard-back">
+                        <h4>Go add some!</h4>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     const { id, english, haitianCreole, pronunciation } = phrase;
 
     const renderPronunciation = ( <span className="phrase-pronunciation">{pronunciation}</span> );
@@ -60,20 +75,7 @@ const Card = ({ type, phrase, flipped, onClick, flashcardId, onIconClick }) => {
                 </div>
             </div>
         );
-    } else {
-        return (
-            <div className={`card flashcard ${flipped ? 'flipped' : ''}`} onClick={onClick}>
-                <div className="flashcard-inner">
-                    <div className="flashcard-front">
-                        <h3>No flashcards yet.</h3>
-                    </div>
-                    <div className="flashcard-back">
-                        <h4>Go add some!</h4>
-                    </div>
-                </div>
-            </div>
-        );
-    };
+    }
 };
 
 export default Card;

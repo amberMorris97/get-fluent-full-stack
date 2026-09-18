@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
 import { DataContext } from "../../../context/DataContext";
 import Card from "../../common/Card";
@@ -16,12 +15,14 @@ const UserFlashcardPreview = ({ flashcard, notify }) => {
     };
 
     const handleStatusClick = async (status) => {
-        if (flashcard.status.toLowerCase() === status.toLowerCase()) return;
-
+        if (flashcard.status.toLowerCase() === status.toLowerCase()) {
+            return notify(false, "Flashcard already set as: " + (status === 'NEEDS_WORK' ? 'NEEDS WORK' : 'MASTERED'));
+        }
         try {
             await updateUserFlashcard(status, flashcard.flashcardId);
+            notify(true, "Flashcard status updated: " + (status === 'NEEDS_WORK' ? 'NEEDS WORK' : 'MASTERED'));
         } catch (error) {
-            // TODO: Give feedback to user
+            notify(false, "Error updating flashcard");
         }
     };
   
