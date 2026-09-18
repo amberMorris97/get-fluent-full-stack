@@ -1,12 +1,12 @@
- import { useState } from 'react';
-import Modal from '../common/Modal';
+ import { useState, useContext } from 'react';
 import learningResourceData from '../mock-data/learningResourceData';
 import resourceData from '../mock-data/resourceData';
 import ResourceLink from '../common/ResourceLink';
 import { Link } from 'react-router';
+import { ModalContext } from '../../context/ModalContext';
 
  const Footer = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    const { handleOpenModal } = useContext(ModalContext);
 
     const renderLearningResources = learningResourceData.map((resource) => {
         return ( 
@@ -29,11 +29,22 @@ import { Link } from 'react-router';
       );
   });
 
+  const resourceContent = (
+    <>
+        <h2 className="learning-resources-modal-title">Learning Resources</h2>
+        {renderLearningResources}
+        <div className="ui-divider"></div>
+        <h2>How To Help</h2>
+        {renderResourceData}
+    </>
+  );
+
+
 
     return (
         <footer className="footer">
             <ul className='footer-list'>
-                <li onClick={() => setIsOpen(true)}>Resources</li>
+                <li onClick={() => handleOpenModal(resourceContent, 'INFO', 'info-modal')}>Resources</li>
                 <li className='all-phrases-link'>
                     <Link to="/all-phrases">
                       All Phrases
@@ -46,13 +57,6 @@ import { Link } from 'react-router';
                 </li>
             </ul>
             <p>&copy; 2026 Get Fluent. All rights reserved.</p>
-            <Modal className="learning-resources-modal" open={isOpen} onClose={() => setIsOpen(false)}>
-                <h2 className="learning-resources-modal-title">Learning Resources</h2>
-                {renderLearningResources}
-                <div className="ui-divider"></div>
-                <h2>How To Help</h2>
-                {renderResourceData}
-            </Modal>
         </footer>
     );
  };

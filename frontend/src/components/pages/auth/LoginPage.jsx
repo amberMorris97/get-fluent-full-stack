@@ -3,7 +3,7 @@ import { AuthContext } from '../../../context/AuthContext';
 import Input from '../../common/forms/inputs/Input';
 import InputErrorMessage from '../../common/forms/inputs/InputErrorMessage';
 import FormWrapper from './FormWrapper';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import FormButton from '../../common/forms/inputs/FormButton';
 import { requestLogin } from '../../../services/authService';
 import { setEmailInStorage, setTokenInStorage } from '../../../services/storageService';
@@ -20,7 +20,7 @@ const errorMessages = {
     genericError: 'There was an error logging you in.',
 };
 
-const LoginPage = () => {
+const LoginPage = ({ notify }) => {
     const { setAuth } = useContext(AuthContext);
     const [user, setUser] = useState(initialUser);
     const [hasErrors, setHasErrors] = useState(false);
@@ -38,6 +38,7 @@ const LoginPage = () => {
                 setEmailInStorage(user.email);
                 setTokenInStorage(token);
                 setAuth({ token, email: user.email, isAuthenticated: true });
+                notify(true, "Success logging you in.");
                 navigate('/');
             }
         } catch (error) {
@@ -47,6 +48,7 @@ const LoginPage = () => {
             } else {
                 setApiError(errorMessages['genericError']);
             } 
+            notify(false, "There was an error logging you in.");
         } finally {
             setSubmitting(false);
         }
@@ -63,6 +65,7 @@ const LoginPage = () => {
         e.preventDefault();
 
         if (user.email === '' || user.password === '') {
+            notify(false);
             setSubmitting(false);
             setHasErrors(true);
         } else {
@@ -75,7 +78,7 @@ const LoginPage = () => {
     return (
         <div className="login-page">
             <h2>Log In</h2>
-            <FormWrapper subtitle={subtitle}>
+            <FormWrapper className="form-wrapper" subtitle={subtitle}>
                 <form className="user-login-form" onSubmit={handleSubmit}>
                     <Input 
                       id="email"
@@ -111,6 +114,7 @@ const LoginPage = () => {
                       msg={apiError}
                     />
                 </form>
+                <span className="auth-reroute-text">Need an account? Sign up <Link to="/register">here</Link>.</span>
             </FormWrapper>
         </div>
     );

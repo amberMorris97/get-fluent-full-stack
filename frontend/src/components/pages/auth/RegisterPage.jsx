@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { requestLogin, requestRegistration } from "../../../services/authService";
 import { setEmailInStorage, setTokenInStorage } from "../../../services/storageService";
 import FormWrapper from "./FormWrapper";
@@ -162,6 +162,7 @@ const RegisterPage = () => {
                   handleClick={handleSubmit}
                 />
               </form>
+              <span className="auth-reroute-text">Already have an account? Login <Link to="/login">here</Link>.</span>
             </FormWrapper>
         </div>
     );

@@ -1,17 +1,21 @@
+import { useContext } from 'react';
 import { useNavigate } from 'react-router';
+import { ModalContext } from '../../context/ModalContext';
 
-const Header = ({ setIsOpen, NavMenu }) => {
+const Header = ({ NavMenu, notify, modalContent }) => {
     const navigate = useNavigate();
+
+    const { handleOpenModal } = useContext(ModalContext);
 
     const onLogoClick = () => {
         navigate('/');
-        setIsOpen(true);
+        handleOpenModal(modalContent, 'INFO', 'info-modal');
     };
 
     return (
         <header className="header">
             <img onClick={onLogoClick} src="./images/get_fluent_logo.svg" alt="logo" height="125" width="125" />
-            <NavMenu />
+            <NavMenu notify={notify} />
         </header>
     );
 };

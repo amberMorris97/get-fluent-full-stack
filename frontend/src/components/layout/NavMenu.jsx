@@ -7,17 +7,20 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 
 library.add(fas)
 
-const NavLinks = () => {
+const NavLinks = ({ toggleNavBar }) => {
     return (
         <div className='nav-links'>
-            <Link to="/">
+            <Link to="/" onClick={toggleNavBar}>
               Get Fluent
             </Link>
-            <Link to="/about">
+            <Link to="/about" onClick={toggleNavBar}>
               About
             </Link>
-            <Link to="/flashcards">
-              Flashcards
+            <Link to="/login" onClick={toggleNavBar}>
+              Login
+            </Link>
+            <Link to="/register" onClick={toggleNavBar}>
+              Register
             </Link>
         </div>
     )
@@ -35,7 +38,7 @@ const NavMenu = () => {
     return (
         <nav className="nav-menu">
             <div className={`nav-container ${isOpen ? 'open' : ''}`}>
-                <NavLinks />
+                <NavLinks toggleNavBar={toggleNavBar} />
             </div>
             <span className="nav-toggle" onClick={toggleNavBar}>{toggleIcon}</span>
         </nav>

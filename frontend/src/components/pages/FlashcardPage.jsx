@@ -1,26 +1,24 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router';
 import generatePhrase from '../../utils/generatePhrase';
 import Button from '../common/Button';
 import Card from '../common/Card';
 import parseFlashcards from '../../utils/parseFlashcards';
 import Modal from '../common/Modal';
+import { DataContext } from '../../context/DataContext';
 
-const FlashcardPage = () => {
-    const [allFlashcards, setAllFlashcards] = useState(null);
-    const [flipped, setFlipped] = useState(false);
-    const [currentFlashcardPhrase, setCurrentFlashcardPhrase] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
-    const [isOpen, setIsOpen] = useState(false);
-    
+const FlashcardPage = ({ notify }) => {
     const navigate = useNavigate();
+    const [flipped, setFlipped] = useState(false);
+    
+    const { userFlashcards, isFlashcardsLoading, deleteUserFlashcard, fetchUserFlashcards } = useContext(DataContext);
+    
+    const [currentFlashcardPhrase, setCurrentFlashcardPhrase] = useState(null);
+    const [currentFlashcardId, setCurrentFlashcardId] = useState(null);
 
     useEffect(() => {
-        const flashcards = parseFlashcards({ ...localStorage });
-        setAllFlashcards(flashcards);
-        setCurrentFlashcardPhrase(generatePhrase(flashcards));
-        setIsLoading(false);
-    }, []);
+        if (userFlashcards?.length > 0) setCurrentFlashcardPhrase(generatePhrase(userFlashcards, setCurrentFlashcardId).phrase);
+    }, [userFlashcards]);
 
     const handleFlipState = () => {
         setFlipped(!flipped);
@@ -30,28 +28,32 @@ const FlashcardPage = () => {
         if (flipped) {
             /** make sure translation is not revealed before flip animation finishes */
             setTimeout(() => {
-                setCurrentFlashcardPhrase(generatePhrase(allFlashcards));
+                setCurrentFlashcardPhrase(generatePhrase(userFlashcards, setCurrentFlashcardId).phrase);
             }, 200);
         } else {
-            setCurrentFlashcardPhrase(generatePhrase(allFlashcards));
+            setCurrentFlashcardPhrase(generatePhrase(userFlashcards, setCurrentFlashcardId).phrase);
         }
 
         setFlipped(false);
     };
 
-    const removeFlashcard = (e) => {
-        localStorage.removeItem(currentFlashcardPhrase.id);
+    const removeFlashcard = async () => {
+        try {
+            await deleteUserFlashcard(currentFlashcardId);
+            notify(true, "Flashcard was deleted");
 
-        /** "fetch" flashcards from updated flashcard storage */
-        const updatedFlashcards = parseFlashcards({ ...localStorage });
-        
-        setAllFlashcards(updatedFlashcards);
-        setCurrentFlashcardPhrase(generatePhrase(updatedFlashcards));
+            fetchUserFlashcards();
+        } catch(error) {
+            notify(false, "Error deleting flashcard. Please try again.");
+        }
         setFlipped(false);
-        setIsOpen(true);
-    }
+    };
 
-    if (!isLoading && allFlashcards.length <= 0) {
+    if (isFlashcardsLoading || !currentFlashcardPhrase) {
+        return <div>Loading...</div>
+    };
+
+    if (!userFlashcards || userFlashcards.length === 0) {
         return (
             <div className="no-flashcards">
                 <Card flipped={flipped} onClick={handleFlipState} />
@@ -64,9 +66,7 @@ const FlashcardPage = () => {
         <div className="flashcard-page">
             <h2>Your Flashcards</h2>
             <span className="tap-to-flip">{"(TAP TO FLIP)"}</span>
-            {isLoading ? (
-                <p>Loading...</p>
-            ) : (
+           
             <div className={`flashcard-wrapper ${flipped ? 'flipped' : ''}`}>
                 <Card 
                     phrase={currentFlashcardPhrase} 
@@ -75,18 +75,14 @@ const FlashcardPage = () => {
                     handleRemoveFlashcard={removeFlashcard}
                     type={'flashcards'}
                 />
-                <Modal className="flashcard-popup" open={isOpen} onClose={() => setIsOpen(false)}>
-                    <span>Flashcard has been removed!</span>
-                </Modal>
             </div>
-          )}
+        
 
-          {!isLoading && (
             <div className='flashcard-btns'>
                 <Button label="Next" className="next-flashcard-btn btn" onClick={handleNextFlashcard} />
                 <Button label="Remove from flashcards" className="remove-flashcard-btn btn" onClick={removeFlashcard} />
             </div>
-          )}
+          
         </div>
     );
 };

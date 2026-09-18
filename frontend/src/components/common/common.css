@@ -114,40 +114,67 @@
     margin-top: 15px;
 }
 
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 1000;
-}
-
-.modal-content {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #ffffff;
-    padding: 50px;
-    z-index: 1000;
-    font-family: 'Inter', sans-serif;
+.modal {
     display: flex;
     flex-direction: column;
-    background-color: #F5EFDD;
-    border: 1px solid black;
-    border-radius: 12px;
-    overflow: scroll;
+    align-items: center;
+    gap: 1em;
+    padding: 2.5em 2em 2em;
+    background-color: rgba(245, 239, 221, 0.1);
+    color: black;
+    text-align: center;
+    height: 35vh;
 }
 
-.modal-content h2 {
-    font-family: 'Space Grotesk', sans-serif;
+.modal-status-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
 }
 
-.close-modal-btn {
-    width: 25%!important;
-    align-self: flex-end;
+.modal-correct .modal-status-icon {
+    border: 3px solid #8bc34a;
+    color: #8bc34a;
+}
+
+.modal-wrong .modal-status-icon {
+    border: 3px solid #e05353;
+    color: #e05353;
+}
+
+.modal-title {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.modal-body {
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.info-modal {
+    background: #F5EFDD;
+    color: black;
+    height: 80vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.haiti-aid-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.info-modal.close-modal-icon {
+    color: black;
 }
 
 .org-link {
@@ -206,6 +233,22 @@
     color: rgb(200, 29, 37);
     font-family: 'IBM Plex Mono', monospace;
     font-size: x-small;
+}
+
+.status-btn {
+    width: 125px;
+    height: 25px;
+    border: none;
+    box-shadow: none;
+    font-size: large;
+}
+
+.start-quiz-btn {
+    background-color: #A2D729;
+}
+
+.close-modal-icon {
+    cursor: pointer;
 }
 
 @media (max-width: 300px) {
@@ -291,4 +334,17 @@
   .modal-content .close-modal-btn {
     width: 100px!important;
   }
+
+  .my-flashcards-filter-btns .btn,
+  .status-btn {
+    width: 20vw;
+  }
+
+}
+
+@media(max-width: 555px) {
+    .quiz-results-content-box {
+        width: 75vw!important;
+    }
+
 }

@@ -1,34 +1,38 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
 import { DataContext } from "../../../context/DataContext";
+import Card from "../../common/Card";
 
-const UserFlashcardPreview = ({ flashcard }) => {
-    const { deleteUserFlashcard } = useContext(DataContext);
+const UserFlashcardPreview = ({ flashcard, notify }) => {
+    const { deleteUserFlashcard, updateUserFlashcard } = useContext(DataContext);
 
     const handleDeleteFlashcard = async () => {
         try {
             await deleteUserFlashcard(flashcard.flashcardId);
+            notify(true, "Flashcard has been deleted.");
         } catch(error) {
-            // TODO: handle error gracefully using modal context
-            console.error(error);
+            notify(false, "Error deleting flashcard.");
         }
-    }
+    };
+
+    const handleStatusClick = async (status) => {
+        if (flashcard.status.toLowerCase() === status.toLowerCase()) return;
+
+        try {
+            await updateUserFlashcard(status, flashcard.flashcardId);
+        } catch (error) {
+            // TODO: Give feedback to user
+        }
+    };
   
     return (
-        <div className="user-flashcard-preview">
-            <button onClick={handleDeleteFlashcard}>
-                <FontAwesomeIcon icon="fa-solid fa-trash" />
-            </button>
-            <h2>{flashcard.phrase.haitianCreole}</h2>
-            <h3>{flashcard.phrase.english}</h3>
-            <h5 className="phrase-pronunciation">{flashcard.phrase.pronunciation}</h5>
-            <div className="flashcard-status-box">
-                <FontAwesomeIcon icon="fa-solid fa-circle-check" />
-                <h6>Mastered</h6>
-                <FontAwesomeIcon icon="fa solid fa-circle-xmark" />
-                <h6>Needs Work</h6>
-            </div>
-        </div>
+        <Card
+            type="preview"
+            phrase={flashcard.phrase}
+            onClick={handleStatusClick}
+            onIconClick={handleDeleteFlashcard}
+            flashcardId={flashcard.flashcardId}
+        />
     );
 };
 

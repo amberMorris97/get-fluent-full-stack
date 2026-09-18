@@ -1,16 +1,15 @@
 .form-wrapper {
     position: relative;
-    border: 1px solid;
     border-radius: 12px;
     padding: 15px;
     box-shadow: 10px 15px 1px rgba(0, 0, 0, 0.3);
-    width: 25vw;
-    height: 50vh;
-
+    width: 30vw;
+    min-height: 50vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border: 1px solid #995FA3;
 }
 
 .form-wrapper img {
@@ -21,6 +20,8 @@
 
 .form-wrapper h4 {
     margin-bottom: 10px;
+    margin-top: 50px;
+    text-align: center;
 }
 
 form {
@@ -33,9 +34,65 @@ form {
 form input {
     border: 1px solid #2c2c2c;
     border-radius: 30px;
-    width: 100%;
+    width: 25vw!important;
     background-color: #f5efdd;
     width: 20vw;
     height: 5vh;
     padding: 15px;
+}
+
+.form-wrapper button {
+    background-color: #A2D729;
+    width: 25vw;
+}
+
+.form-wrapper h4 {
+    padding: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: normal;
+    color: #16348C;
+}
+
+.auth-reroute-text {
+    padding: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: small;
+}
+
+@media(max-width: 1221px) {
+    .form-wrapper {
+        width: 40vw;
+    }
+
+    form input {
+        width: 35vw!important;
+    }
+}
+
+@media(max-width: 767px) {
+    .form-wrapper {
+        width: 50vw;
+    }
+
+    .form-wrapper input {
+        width: 40vw!important;
+    }
+
+    button {
+        width: 40vw!important;
+    }
+}
+
+@media(max-width: 555px) {
+    .form-wrapper {
+        width: 60vw;
+    }
+
+    .form-wrapper input {
+        width: 50vw!important;
+    }
+
+    button {
+        width: 50vw!important;
+    }
 }

@@ -1,20 +1,59 @@
-import { createPortal } from 'react-dom';
-import Button from './Button';
+import { useContext, useEffect, useRef } from 'react';
+import { ModalContext } from '../../context/ModalContext';
 
-const Modal = ({ open, children, onClose, className = ''}) => {
-    if (!open) return null;
+import IconButton from './IconButton';
 
-    return createPortal(
-        <>
-            <div className="modal-overlay">
-                <div className={`modal-content ${className}`}>
-                    <Button label="Get Fluent" className="close-modal-btn" onClick={onClose} />
-                    {children}
+const VARIANT_CONFIG = { 
+    CORRECT: { icon: 'fa-check', className: 'modal-correct' },
+    WRONG: { icon: 'fa-xmark', className: 'modal-wrong' },
+    INFO: { icon: 'fa-info', className: 'info-modal'},
+};
+
+const Modal = () => {
+    const modalRef = useRef(null);
+    const buttonRef = useRef();
+    const { isModalOpen, handleCloseModal, modalContent, modalTitle } = useContext(ModalContext);
+    
+    useEffect(() => {
+        buttonRef.current.focus();
+    }, []);
+
+    const variantConfig = VARIANT_CONFIG[modalTitle];
+
+    useEffect(() => {
+        if (isModalOpen) {
+            modalRef.current?.showModal();
+        } else {
+            modalRef.current?.close();
+        }
+    }, [isModalOpen]);
+
+    return (
+        <dialog ref={modalRef} onCancel={handleCloseModal} closedby="any">
+            <div className={`modal ${variantConfig ? variantConfig.className : ''}`}>
+                <div className='modal-top-bar'>
+                    <IconButton
+                        id='close-modal'
+                        ref={buttonRef}
+                        ariaLabel='Close'
+                        handleClick={handleCloseModal}>
+                        <i className='fa-solid fa-xmark close-modal-icon'></i>   
+                    </IconButton>
+                </div>
+
+                {variantConfig && (
+                    <div className="modal-status-icon">
+                        <i className={`fa-solid ${variantConfig.icon}`}></i>
+                    </div>
+                )}
+
+                {modalTitle !== 'INFO' && <h3>{modalTitle === 'CORRECT' ? 'Correct!' : modalTitle === 'WRONG' ? 'WRONG' : modalTitle}</h3>}
+                <div className='modal-body'>
+                    {modalContent}
                 </div>
             </div>
-        </>,
-        document.getElementById('portal')
-    )
-}
+        </dialog>
+    );
+};
 
 export default Modal;

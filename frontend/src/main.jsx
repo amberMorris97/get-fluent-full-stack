@@ -5,14 +5,17 @@ import './index.css';
 import App from './App.jsx';
 import { AuthContextProvider } from './context/AuthContext.jsx';
 import { DataContextProvider } from './context/DataContext.jsx';
+import { ModalContextProvider } from './context/ModalContext.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthContextProvider>
       <DataContextProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <ModalContextProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ModalContextProvider>
       </DataContextProvider>
     </AuthContextProvider>
   </StrictMode>,

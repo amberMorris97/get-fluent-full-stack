@@ -1,8 +1,8 @@
 import NavMenu from "./NavMenu";
 import Header from "./Header";
 
-const PublicHeader = ({ setIsOpen }) => {
-    return ( <Header setIsOpen={setIsOpen} NavMenu={NavMenu} /> );
+const PublicHeader = ({ modalContent }) => {
+    return ( <Header modalContent={modalContent} NavMenu={NavMenu} /> );
 };
 
 export default PublicHeader;
