@@ -10,6 +10,7 @@ const QuizPage = ({ notify }) => {
     const navigate = useNavigate();
     const { userFlashcards, isLoading, submitQuizScore } = useContext(DataContext);
     const { handleOpenModal } = useContext(ModalContext);
+    const needsWorkFlashcards = userFlashcards.filter((fc) => fc.status !== 'MASTERED');
 
     const [submitting, setSubmitting] = useState(false);
     const [questions, setQuestions] = useState([]);
@@ -21,7 +22,7 @@ const QuizPage = ({ notify }) => {
 
     useEffect(() => {
         if (userFlashcards) {
-            setQuestions(shuffle(userFlashcards).slice(0, 10));
+            setQuestions(shuffle(needsWorkFlashcards).slice(0, 10));
         }
     }, [userFlashcards]);
 
@@ -37,6 +38,9 @@ const QuizPage = ({ notify }) => {
     };
 
     const handleStartQuiz = () => {
+        if (questions.length <= 0) {
+            return notify(false, "You must add flashcards before taking a quiz.");
+        }
         setQuizStarted(true);
         setCurrentIndex(0);
     };
@@ -76,7 +80,6 @@ const QuizPage = ({ notify }) => {
 
     if (isLoading || !userFlashcards) {
         return (
-            // TODO: Implement loading spinner
             <div>Loading...</div>
         );
     };

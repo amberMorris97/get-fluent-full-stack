@@ -18,7 +18,7 @@ const QuizScoreDisplay = () => {
 
     return (
         <div className="quiz-score-display-box">
-            {renderQuizScore}
+            {!userQuizScores.length ? <h3>Take a quiz to see your scores!</h3> : renderQuizScore}
             <div className="quiz-score-display-pagination-btns">
                 <Button
                     label="Previous"
