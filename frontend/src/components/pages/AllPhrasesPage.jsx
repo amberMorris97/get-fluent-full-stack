@@ -30,6 +30,12 @@ const AllPhrasesPage = ({ allPhrases, flashcardPhraseIds, userFlashcards, notify
         }
     };
 
+    if (!Array.isArray(allPhrases) || allPhrases.length === 0) {
+        return (
+            <div>Loading...</div>
+        );
+    }
+
     return (
         <div className="all-phrases-page">
             <h2>All Phrases</h2>
