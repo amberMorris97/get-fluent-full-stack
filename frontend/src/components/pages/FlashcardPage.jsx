@@ -3,8 +3,6 @@ import { useNavigate } from 'react-router';
 import generatePhrase from '../../utils/generatePhrase';
 import Button from '../common/Button';
 import Card from '../common/Card';
-import parseFlashcards from '../../utils/parseFlashcards';
-import Modal from '../common/Modal';
 import { DataContext } from '../../context/DataContext';
 
 const FlashcardPage = ({ notify }) => {
