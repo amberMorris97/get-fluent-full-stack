@@ -11,7 +11,10 @@ const UserProfilePage = ({ notify }) => {
     const [statusFilter, setStatusFilter] = useState('all');
 
     const filteredFlashcards = userFlashcards?.filter((flashcard) => {
+        // If the user wants to view all flashcards, return everything
         if (statusFilter === 'all') return true;
+
+        // otherwise, return flashcards with a status property that matches the selected status filter
         return flashcard.status.toLowerCase() === statusFilter.toLowerCase();
     });
 
@@ -25,7 +28,7 @@ const UserProfilePage = ({ notify }) => {
     
     return (
         <section className="user-profile-page">
-            <h1>Profile</h1>
+            <h2>{auth.email}</h2>
             <div className="user-profile-content-grid">
                 <div className="my-flashcards-section">
                     <h2>MY FLASHCARDS</h2>

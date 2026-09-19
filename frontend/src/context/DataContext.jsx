@@ -65,10 +65,10 @@ export const DataContextProvider = ({ children }) => {
         } catch(error) {
             throw error;
         } finally {
-            fetchUserFlashcards( );
+            fetchUserFlashcards();
         }
     };
-
+    
     const fetchQuizScores = async (page = quizScoresPage) => {
         try {
             let response = await requestQuizScores(email, page);
@@ -77,7 +77,7 @@ export const DataContextProvider = ({ children }) => {
         } catch(error) {
             throw error;
         } 
-    }
+    };
 
     const submitQuizScore = async (score, quizLength) => {
         try {
@@ -90,13 +90,18 @@ export const DataContextProvider = ({ children }) => {
     };
 
     const nextQuizScoresPage = () => {
+        // If quizScore.hasNext() is false do nothing
         if (!quizScoreHasNext) return;
+
         const next = quizScoresPage + 1;
+
+        // Update page state and fetch next quiz page
         setQuizScoresPage(next);
         fetchQuizScores(next);
     };
 
     const prevQuizScoresPage = () => {
+        // If previous page is -1, set page to 0
         const prev = Math.max(0, quizScoresPage - 1);
         setQuizScoresPage(prev);
         fetchQuizScores(prev);
@@ -116,6 +121,7 @@ export const DataContextProvider = ({ children }) => {
     }, []);
 
     useEffect(() => {
+        // Only fetch flashcards and quiz scores if a user is logged in and authenticated
         if (isAuthenticated && allPhrases !== null) {
             fetchUserFlashcards();
             fetchQuizScores(quizScoresPage);

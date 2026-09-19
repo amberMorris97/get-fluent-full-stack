@@ -32,25 +32,29 @@ const HomePage = ({ notify }) => {
         } 
     };
 
+    const fallbackPhrase = {
+        id: null,
+        haitianCreole: 'Error loading the data',
+        english: 'Please refresh or try again later',
+    };
+
+    const displayPhrase = currentPhrase ?? fallbackPhrase;
+
     return (
         <section className='home-page'>
-            {!currentPhrase ? (
-                <div>Loading...</div>
-             ) : (
-                <>
-                    <h1 className='title'>Pick up a new phrase everyday</h1>
-                    <span className='sub-title'>Learn phrases in Haitian Creole</span>
-                    <Card
-                        type={'phrases'}
-                        phrase={currentPhrase}
-                        handleAddFlashcard={addToFlashCards}
-                    />
-                    <div className='home-page-btns'>
-                        <Button label="Next phrase" className="next-phrase-btn btn" onClick={handleGetNewPhrase} />
-                        <Button label={auth.isAuthenticated ? 'Add to flashcards' : 'Log In'} className="add-flashcard-btn btn" onClick={auth.isAuthenticated ? addToFlashCards : () => navigate('/login')} />
-                    </div>
-              </>
-            )}
+            <>
+                <h1 className='title'>Pick up a new phrase everyday</h1>
+                <span className='sub-title'>Learn phrases in Haitian Creole</span>
+                <Card
+                    type={'phrases'}
+                    phrase={displayPhrase}
+                    handleAddFlashcard={addToFlashCards}
+                />
+                <div className='home-page-btns'>
+                    <Button label="Next phrase" className="next-phrase-btn btn" onClick={handleGetNewPhrase} />
+                    <Button label={auth.isAuthenticated ? 'Add to flashcards' : 'Log In'} className="add-flashcard-btn btn" onClick={auth.isAuthenticated ? addToFlashCards : () => navigate('/login')} />
+                </div>
+            </>
         </section>
     );
 };

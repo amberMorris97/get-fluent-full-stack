@@ -73,47 +73,32 @@ function App() {
       <Toaster />
       <Modal />
       {auth.isAuthenticated ? <UserHeader notify={notify} modalContent={modalContent} /> : <PublicHeader modalContent={modalContent} />}
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : !auth.isAuthenticated ? (
-          <Routes>
-            <Route path="/" element={
-              <HomePage />
-            } />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/all-phrases" element={
-              <AllPhrasesPage 
-                allPhrases={allPhrases} 
-                flashcardPhraseIds={flashcardPhraseIds} 
-                userFlashcards={userFlashcards} 
-                notify={notify} />} 
-              />
-            <Route path="/login" element={<LoginPage notify={notify} />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="*" element={<Navigate to="/" />} />        
-          </Routes>
- 
-        ) : (
-          <Routes>
-              <Route path="/" element={
-                <HomePage notify={notify} />
-              } />
-              <Route path="/about" element={<AboutPage />} />
+        <Routes>
+          <Route path="/" element={<HomePage /> } />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/all-phrases" element={
+            <AllPhrasesPage 
+              allPhrases={allPhrases} 
+              flashcardPhraseIds={flashcardPhraseIds} 
+              userFlashcards={userFlashcards} 
+              notify={notify} />} 
+            />
+          {!auth.isAuthenticated && (
+            <>
+              <Route path="/login" element={<LoginPage notify={notify} />} />
+              <Route path="/register" element={<RegisterPage />} />
+            </>
+          )}
+          {auth.isAuthenticated && (
+            <>
               <Route path="/profile" element={<UserProfilePage notify={notify} />} />
               <Route path="/flashcards" element={<FlashcardPage notify={notify} />} />
-              <Route path="/all-phrases" element={
-                <AllPhrasesPage 
-                  allPhrases={allPhrases} 
-                  flashcardPhraseIds={flashcardPhraseIds} 
-                  userFlashcards={userFlashcards} 
-                  notify={notify} />} 
-                />
               <Route path="/quiz" element={<QuizPage notify={notify} />} />
               <Route path="/quizResults" element={<QuizResultsPage />} />
-              <Route path="*" element={<Navigate to="/" />} />
-            </Routes>
-        )}
-   
+            </>
+          )}
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
       <Footer />
     </div>
   );

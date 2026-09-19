@@ -16,6 +16,7 @@ const QuizResultsPage = () => {
         <div className="quiz-results-page">
             <h1>Quiz Results</h1>
             <div className="quiz-results-content-box">
+                {/** conic gradient sweeps colors around a center point; fills 0 to x% of the circle green and x% to 100% of the circle red */}
                 <div 
                     className="score-circle"
                      style={{

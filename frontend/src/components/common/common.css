@@ -31,7 +31,8 @@
 .flashcard,
 .phrase-card {
     width: 50vw;
-    height: 50vh;
+    /* height: 50vh; */
+    height: clamp(320px, 50vh, 520px);
     align-items: center;
 }
 

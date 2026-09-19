@@ -33,9 +33,9 @@ const QuizScoreDisplay = () => {
             </div>
             <div className="take-quiz-btn-container">
                 <Button
-                label="Take Quiz"
-                onClick={handleTakeQuiz}
-                className="quiz-score-take-quiz-btn"
+                    label="Take Quiz"
+                    onClick={handleTakeQuiz}
+                    className="quiz-score-take-quiz-btn"
                 />
             </div>
         </div>
