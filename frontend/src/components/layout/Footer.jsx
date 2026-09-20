@@ -10,10 +10,11 @@ import { ModalContext } from '../../context/ModalContext';
 
     const renderLearningResources = learningResourceData.map((resource) => {
         return ( 
-            <ResourceLink 
+            <ResourceLink
+               key={resource.title + 'key'}
                title={resource.title}
                description={resource.description}
-               url={resource.url}
+               url={resource.url + 'key'}
             />
         );
     });

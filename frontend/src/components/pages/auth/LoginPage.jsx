@@ -41,7 +41,7 @@ const LoginPage = ({ notify }) => {
                 setEmailInStorage(user.email);
                 setTokenInStorage(token);
                 setAuth({ token, email: user.email, isAuthenticated: true });
-                notify(true, 'Success logging you in.');
+                notify(true, 'Successfully logged in.');
                 navigate('/');
             }
         } catch (error) {

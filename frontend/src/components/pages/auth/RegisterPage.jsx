@@ -27,7 +27,7 @@ const errorMessages = {
 
 const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
 
-const RegisterPage = () => {
+const RegisterPage = ({ notify }) => {
     const { setAuth } = useContext(AuthContext);
 
     const [user, setUser] = useState(initialUser);
@@ -45,11 +45,11 @@ const RegisterPage = () => {
                 setEmailInStorage(user.email);
                 setTokenInStorage(token);
                 setAuth({ token, email: user.email, isAuthenticated: true });
+                notify(true, "fully logged in.");
                 navigate('/');
             }
         } catch (error) {
-            console.error(error.message);
-            // TODO: Give user feedback
+            notify(false, "Error logging you in.");
         } finally {
             setSubmitting(false);
         }
@@ -68,8 +68,7 @@ const RegisterPage = () => {
                 logInUser(newUser);
             }
         } catch (error) {
-            console.error(error.message);
-            // TODO: Give user feedback
+            notify(false, "Error creating your account.");
         }
     };
 

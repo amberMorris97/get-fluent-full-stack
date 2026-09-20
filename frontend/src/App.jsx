@@ -86,7 +86,7 @@ function App() {
           {!auth.isAuthenticated && (
             <>
               <Route path="/login" element={<LoginPage notify={notify} />} />
-              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/register" element={<RegisterPage notify={notify} />} />
             </>
           )}
           {auth.isAuthenticated && (
