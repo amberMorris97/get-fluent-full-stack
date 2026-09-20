@@ -21,6 +21,8 @@ const errorMessages = {
     genericError: 'There was an error logging you in.',
 };
 
+const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+
 const LoginPage = ({ notify }) => {
     const { setAuth } = useContext(AuthContext);
     const [user, setUser] = useState(initialUser);
