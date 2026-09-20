@@ -133,7 +133,7 @@ const RegisterPage = () => {
                   handleChange={handleChange}
                 />
                 <InputErrorMessage 
-                  hasError={hasErrors && (user.email === '' || !emailRegex.test(user.email))}
+                  hasError={hasErrors && !emailRegex.test(user.email)}
                   msg={user.email === '' ? errorMessages['emailRequired'] : errorMessages['invalidEmail']}
                 />
                 <Input 
