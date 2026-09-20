@@ -14,9 +14,10 @@ const initialUser = {
 };
 
 const errorMessages = {
-    emailRequired: "Email is required.",
-    passwordRequired: "Password is required.",
-    emailOrPasswordIncorrect: "Email or password was incorrect.",
+    emailRequired: 'Email is required.',
+    passwordRequired: 'Password is required.',
+    invalidEmail: 'Please enter a valid email.',
+    emailOrPasswordIncorrect: 'Email or password was incorrect.',
     genericError: 'There was an error logging you in.',
 };
 
@@ -38,7 +39,7 @@ const LoginPage = ({ notify }) => {
                 setEmailInStorage(user.email);
                 setTokenInStorage(token);
                 setAuth({ token, email: user.email, isAuthenticated: true });
-                notify(true, "Success logging you in.");
+                notify(true, 'Success logging you in.');
                 navigate('/');
             }
         } catch (error) {
@@ -48,7 +49,7 @@ const LoginPage = ({ notify }) => {
             } else {
                 setApiError(errorMessages['genericError']);
             } 
-            notify(false, "There was an error logging you in.");
+            notify(false, 'There was an error logging you in.');
         } finally {
             setSubmitting(false);
         }
@@ -74,47 +75,47 @@ const LoginPage = ({ notify }) => {
         }
      };
 
-    const subtitle = "Welcome back!";
+    const subtitle = 'Welcome back!';
     return (
-        <div className="login-page">
+        <div className='login-page'>
             <h2>Log In</h2>
-            <FormWrapper className="form-wrapper" subtitle={subtitle}>
-                <form className="user-login-form" onSubmit={handleSubmit}>
+            <FormWrapper className='form-wrapper' subtitle={subtitle}>
+                <form className='user-login-form' onSubmit={handleSubmit}>
                     <Input 
-                      id="email"
-                      label="Email"
-                      value={user.email}
-                      handleChange={handleChange}
-                    />
-                    <InputErrorMessage
-                        hasError={hasErrors && user.email === ''}
-                        msg={errorMessages['emailRequired']}
+                        id='email'
+                        label='Email'
+                        value={user.email}
+                        handleChange={handleChange}
+                        />
+                    <InputErrorMessage 
+                        hasError={hasErrors && !emailRegex.test(user.email)}
+                        msg={user.email === '' ? errorMessages['emailRequired'] : errorMessages['invalidEmail']}
                     />
                     <Input 
-                      id="password"
-                      label="Password"
-                      type="password"
-                      value={user.password}
-                      handleChange={handleChange}
+                        id='password'
+                        label='Password'
+                        type='password'
+                        value={user.password}
+                        handleChange={handleChange}
                     />
                     <InputErrorMessage 
                         hasError={hasErrors && user.password === ''}
                         msg={errorMessages['passwordRequired']}
                     />
                     <FormButton 
-                      id="log-in"
-                      type="submit"
-                      label="Log In"
-                      classes="btn"
-                      handleClick={handleSubmit}
-                      disabled={submitting}
+                        id='log-in'
+                        type='submit'
+                        label='Log In'
+                        classes='btn'
+                        handleClick={handleSubmit}
+                        disabled={submitting}
                     />
                     <InputErrorMessage
-                      hasError={hasErrors && apiError.length > 0}
-                      msg={apiError}
+                        hasError={hasErrors && apiError.length > 0}
+                        msg={apiError}
                     />
                 </form>
-                <span className="auth-reroute-text">Need an account? Sign up <Link to="/register">here</Link>.</span>
+                <span className='auth-reroute-text'>Need an account? Sign up <Link to='/register'>here</Link>.</span>
             </FormWrapper>
         </div>
     );
