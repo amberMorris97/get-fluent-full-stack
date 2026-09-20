@@ -48,7 +48,11 @@ public class UserFlashcardController {
     }
 
     @GetMapping("/{email}")
-    public ResponseEntity<?> getUserFlashcards(@PathVariable String email) {
+    public ResponseEntity<?> getUserFlashcards(@PathVariable String email, Authentication authentication) {
+        if (!authentication.getName().equals(email)) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+
         User user = userRepository.findByEmailAddress(email).orElse(null);
         List<UserFlashcard> flashcards = userFlashcardRepository.findAllByUser(user);
         List<UserFlashcardResponseDTO> dtos = flashcards.stream()

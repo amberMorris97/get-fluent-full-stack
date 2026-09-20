@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -49,8 +50,13 @@ public class QuizScoreController {
     @GetMapping("/{emailAddress}")
     public ResponseEntity<?> getQuizScoresByUser(
             @PathVariable String emailAddress,
+            Authentication authentication,
             @RequestParam(defaultValue = "0") int offset,
             @RequestParam(defaultValue = "10") int limit) {
+        if (!authentication.getName().equals(emailAddress)) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+
         User user = userRepository.findByEmailAddress(emailAddress)
                 .orElseThrow(() -> new RuntimeException("User not found with email: " + emailAddress));
 
