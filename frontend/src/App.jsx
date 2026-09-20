@@ -74,7 +74,7 @@ function App() {
       <Modal />
       {auth.isAuthenticated ? <UserHeader notify={notify} modalContent={modalContent} /> : <PublicHeader modalContent={modalContent} />}
         <Routes>
-          <Route path="/" element={<HomePage /> } />
+          <Route path="/" element={<HomePage notify={notify} /> } />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/all-phrases" element={
             <AllPhrasesPage 

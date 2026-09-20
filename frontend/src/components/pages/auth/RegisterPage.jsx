@@ -20,9 +20,12 @@ const errorMessages = {
     firstNameRequired: "first name is required",
     lastNameRequired: "Last name is required",
     emailRequired: "Email is required",
+    invalidEmail: "Please enter a valid email",
     passwordLength: "Password must be at least 8 characters long",
     passwordMismatch: "Passwords must be identical.",
 }
+
+const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
 
 const RegisterPage = () => {
     const { setAuth } = useContext(AuthContext);
@@ -86,7 +89,8 @@ const RegisterPage = () => {
             user.email === '' ||
             user.password === '' ||
             user.password.length < 8 ||
-            user.password !== user.verifyPassword
+            user.password !== user.verifyPassword ||
+            !emailRegex.test(user.email)
         ) {
             setSubmitting(false);
             setHasErrors(true);
@@ -129,8 +133,8 @@ const RegisterPage = () => {
                   handleChange={handleChange}
                 />
                 <InputErrorMessage 
-                  hasError={hasErrors && user.email === ''}
-                  msg={errorMessages['emailRequired']}
+                  hasError={hasErrors && (user.email === '' || !emailRegex.test(user.email))}
+                  msg={user.email === '' ? errorMessages['emailRequired'] : errorMessages['invalidEmail']}
                 />
                 <Input 
                   id="password"
@@ -159,6 +163,7 @@ const RegisterPage = () => {
                   type="submit"
                   label="Sign Up"
                   classes="btn"
+                  disabled={submitting}
                   handleClick={handleSubmit}
                 />
               </form>
