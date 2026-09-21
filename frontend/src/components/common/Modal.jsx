@@ -6,7 +6,7 @@ import IconButton from './IconButton';
 const VARIANT_CONFIG = { 
     CORRECT: { icon: 'fa-check', className: 'modal-correct' },
     WRONG: { icon: 'fa-xmark', className: 'modal-wrong' },
-    INFO: { icon: 'fa-info', className: 'info-modal'},
+    INFO: { icon: 'fa-circle-info', className: 'info-modal'},
 };
 
 const Modal = () => {
