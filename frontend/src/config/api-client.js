@@ -4,7 +4,7 @@ import { getTokenFromStorage } from '../services/storageService';
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const apiClient = axios.create({
-    baseURL: `${apiUrl}`,
+    baseURL: '/api',
 });
 
 apiClient.interceptors.request.use(
