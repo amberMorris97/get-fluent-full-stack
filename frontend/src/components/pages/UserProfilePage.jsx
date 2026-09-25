@@ -7,7 +7,7 @@ import QuizScoreDisplay from "./quiz/QuizScoreDisplay";
 
 const UserProfilePage = ({ notify }) => {
     const { auth } = useContext(AuthContext);
-    const { userFlashcards, isFlashcardsLoading, userQuizScores } = useContext(DataContext);
+    const { userFlashcards, isFlashcardsLoading, isQuizScoresLoading, userQuizScores } = useContext(DataContext);
     const [statusFilter, setStatusFilter] = useState('all');
 
     const filteredFlashcards = userFlashcards?.filter((flashcard) => {
@@ -18,7 +18,7 @@ const UserProfilePage = ({ notify }) => {
         return flashcard.status.toLowerCase() === statusFilter.toLowerCase();
     });
 
-    if (isFlashcardsLoading) {
+    if (isFlashcardsLoading || isQuizScoresLoading) {
         return <div>Loading...</div>
     }
 

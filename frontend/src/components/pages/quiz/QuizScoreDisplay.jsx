@@ -8,7 +8,7 @@ const QuizScoreDisplay = () => {
     const { userQuizScores, quizScoresPage, nextQuizScoresPage, prevQuizScoresPage, quizScoreHasNext } = useContext(DataContext);
     const navigate = useNavigate();
    
-    const renderQuizScore = userQuizScores?.reverse().map((score) => {
+    const renderQuizScore = userQuizScores?.map((score) => {
         return <QuizScore key={`${score.id}-quiz-score`} score={score.score} length={score.quizLength} createdAt={score.createdAt} />
     });
 

@@ -9,11 +9,12 @@ export const DataContext = createContext();
 export const DataContextProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [isFlashcardsLoading, setIsFlashcardsLoading] = useState(true);
+    const [isQuizScoresLoading, setIsQuizScoresLoading] = useState(true);
     const [quizScoresPage, setQuizScoresPage] = useState(0);
     const [quizScoreHasNext, setQuizScoreHasNext] = useState(false);
     const [allPhrases, setAllPhrases] = useState(null);
     const [userFlashcards, setUserFlashcards] = useState([]);
-    const [userQuizScores, setUserQuizScores] = useState(null);
+    const [userQuizScores, setUserQuizScores] = useState([]);
 
     const { auth } = useContext(AuthContext);
     const { isAuthenticated } = auth;
@@ -76,7 +77,9 @@ export const DataContextProvider = ({ children }) => {
             setQuizScoreHasNext(response.data.hasNextPage);
         } catch(error) {
             throw error;
-        } 
+        } finally {
+            setIsQuizScoresLoading(false);
+        }
     };
 
     const submitQuizScore = async (score, quizLength) => {
@@ -146,6 +149,7 @@ export const DataContextProvider = ({ children }) => {
             prevQuizScoresPage,
             quizScoreHasNext,
             quizScoresPage,
+            isQuizScoresLoading,
         }}>
             {!isLoading && children}
         </DataContext.Provider>
